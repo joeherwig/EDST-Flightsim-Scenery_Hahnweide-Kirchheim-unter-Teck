@@ -1,1 +1,2 @@
-*.skb
+.git
+source/model/**/*.skb
