@@ -6,6 +6,7 @@ This repository is made to publish and offer a contribution platform for the wor
 
 ## Table of contents
 * [Quick start](#quick-start)
+* [Big Thanks](#big-thanks)
 * [Contributing](#contributing)
 * [Bugs and feature requests](#bugs-and-feature-requests)
 * [Copyright and license](#copyright-and-license)
@@ -13,9 +14,12 @@ This repository is made to publish and offer a contribution platform for the wor
 ## Quick start
 Well, i just began, so at the moment you still cannot download nor use this airport for direct integration into your flight simulator.
 
+## Big thanks
+go to [Arno Gerretsen](Arno Gerretsen) who created and maintains some of the most advanced tools for scenery creating.
+Arno, You're brilliant!
+
 ## Contributing
-Maybe you want, to contribute to this repo, to bring this samll airfield in this very interesting landscape forward for the flight simulator community.
-You're welcome to do so. Just fork this repo, check-in your changes and send me a pull-request.
+It would be great, if you take part on developing and improving this small VFR airfield in this very interesting landscape for publishing to the FS-community. If you want, you are invited to contribute to this repo. Just fork it, check-in your changes and send me a pull-request.
 If you're not familiar with using Github you can also send me an email to inform me about the changes and additions you made, and i'll probably embed them into my repo.
 
 ## Bugs and feature requests
