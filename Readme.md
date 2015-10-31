@@ -1,6 +1,6 @@
 # EDST - Flightsim-Scenery Hahnweide / Kirchheim unter Teck, Germany
 
-This repository is made to publish and offer a contribution platform for the work on the freeware airfield "Hahnweide" which is located southern Germany only a few kilometers east of Stuttgart.
+This repository is made to publish and offer a contribution platform for the work on the freeware airfield "Hahnweide" which is located in southern germany, just a few kilometers east of Stuttgart in direct neighbourhood of the suabian alb.
 
 ![ScreenShot](/img/Title.png)
 
@@ -15,7 +15,7 @@ This repository is made to publish and offer a contribution platform for the wor
 Well, i just began, so at the moment you still cannot download nor use this airport for direct integration into your flight simulator.
 
 ## Big thanks
-go to [Arno Gerretsen](Arno Gerretsen) who created and maintains some of the most advanced tools for scenery creating.
+go to [Arno Gerretsen](http://www.scenerydesign.org/about/) who created and maintains some of the most advanced tools for scenery creating.
 Arno, You're brilliant!
 
 ## Contributing
