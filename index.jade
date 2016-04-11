@@ -1,6 +1,7 @@
 html
   head
     title My test
+    link(rel="stylesheet" href="css/blueimp-gallery.min.css")
     link(rel="stylesheet" href="css/index.css")
   body
     //- .header
@@ -10,24 +11,44 @@ html
     //-         a(href="#download") Download
     //-       li 
     //-         a(href="#charts") Charts
-    .content
+    #links.content
       h1 EDST Kirchheim unter Teck (Hahnweide)
       p Die Hahnweide ist ein kleiner Flugplatz &ouml;stlich von Stuttgart im S&uuml;den Deutschlands, direkt am Rande der Schw&auml;bischen Alb. Der Platz beheimatet gleich mehrere Vereine sowie die Flugschule des Baden-W&uuml;rttembergischen Luftfahrt Verbands e. V.
       .cols2
         h2 Die Lage
-        p Obwohl die Hahnweide aufgrund von L&auml;rmschutzvorgaben unterj&auml;hrig nur f&uuml;r die am Platz beheimateten Vereine per Motorflug genutzt werden kann, bietet die Hahnweide aufgrund seiner N&auml;he zum Albtrauf und zur nahe gelegenen Stadt Stuttgart viele reizvolle M&ouml;glichkeiten f&uml;r tolle Fl&uuml;ge in die Umgebung.
+        p Obwohl die Hahnweide aufgrund von L&auml;rmschutzvorgaben unterj&auml;hrig nur f&uuml;r die am Platz beheimateten Vereine per Motorflug genutzt werden kann, bietet die Hahnweide aufgrund seiner N&auml;he zum Albtrauf und zur nahe gelegenen Stadt Stuttgart viele reizvolle M&ouml;glichkeiten f&uuml;r tolle Fl&uuml;ge in die Umgebung.
         .image
-          img(src="http://nordenflieger.de/bilder/VFR/EDST_Hahnweide_real.jpg")
+          a(href="http://nordenflieger.de/bilder/VFR/EDST_Hahnweide_real.jpg")
+            img(src="http://nordenflieger.de/bilder/VFR/EDST_Hahnweide_real.jpg")
           .caption Die Hahnweide aus der Luft Blick Richtung Osten.
             .author nordenflieger.de
-
 
         h2 Besonderheiten
         p Bekannt ist die Hahnwiede insbesondere bei Liebhabern klassischer Flugzeuge aufgrund des in der Regel alle zwei Jahre stattfindenden Oldtimer Fliegertreffens.
         .image
-          img(src="http://www.teckbote.de/cms_media/module_img/42/21470_1_articleorg_544eeb1f889f2.jpg")
+          a(href="http://www.teckbote.de/cms_media/module_img/42/21470_1_articleorg_544eeb1f889f2.jpg")
+            img(src="http://www.teckbote.de/cms_media/module_img/42/21470_1_articleorg_544eeb1f889f2.jpg")
           .caption Oldtimer-Treffen.
             .author teckbote.de
         p Das Fliegertreffen findet in der Regel alle zwei Jahre Statt und zieht neben ganz besonderen historischen Flugzeugen und Nachbauten stets auch tausende begeisterte Zuschauer an.
+
+    #blueimp-gallery.blueimp-gallery
+      - var prevsymbol = '‹›×'
+      .slides
+      h3.title
+      a.prev &lt;
+      a.next &gt;
+      a.close x
+      a.play-pause
+      ol.indicator
+    script(src="js/blueimp-gallery.min.js")
+    script.
+      document.getElementById('links').onclick = function (event) {
+        event = event || window.event;
+        var target = event.target || event.srcElement, link = target.src ? target.parentNode : target,
+          options = {index: link, event: event},
+          links = this.getElementsByTagName('a');
+        blueimp.Gallery(links, options);
+      };
     //- .footer just some footer text.
     //-   a(href="#impressum") Impressum
