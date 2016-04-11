@@ -1,0 +1,97 @@
+@media (min-width: 1000px)
+  body
+    color: black
+    .content
+      position: relative
+      padding-top: 70px
+      top: 50px
+      max-width: 1400px
+      margin: auto
+      width: 60%
+      text-align: justify
+      .cols2
+        max-width: 1400px
+        -webkit-column-count: 2
+        -moz-column-count: 2
+        column-count: 2
+        -webkit-column-gap: 40px
+        -moz-column-gap: 40px
+        column-gap: 40px
+        text-align: justify
+      .image
+        -webkit-column-break-inside: avoid
+        page-break-inside: avoid
+        break-inside: avoid
+        width: 100%
+        float: both
+        img
+          position: relative
+          width: 100%
+          & + .caption
+            width: 100%
+            font-variant: small-caps
+            border-bottom: 1px solid silver
+            margin-bottom: 10px
+
+    h1
+      text-align: left
+      & + p
+        font-weight: bold
+    p
+      margin-top: 5px
+      .author
+        font-style: italic
+        margin-left: 1em
+        font-weight: normal
+
+@media all
+  .header
+    position: fixed
+    top: 0px
+    left: 0em
+    right: 0em
+    height: 50px
+    background-color: rgba(40,60,255,0.9)
+    margin-bottom: 10px
+    padding: 10px
+  .footer
+    position: fixed
+    bottom: 0px
+    left: 0em
+    right: 0em
+    height: 50px
+    background-color: rgba(40,60,255,0.9)
+    margin-top: 10px
+    padding: 10px
+  .deeplinkQRCode
+    display: none
+
+@media print
+
+  body
+    .content
+      img
+        position: relative
+        width: 100%
+        & + .caption
+          font-variant: small-caps
+          border-bottom: 1px solid silver
+          margin-bottom: 10px
+      -webkit-column-count: 2
+      -moz-column-count: 2
+      column-count: 2
+      -webkit-column-gap: 40px
+      -moz-column-gap: 40px
+      column-gap: 40px
+    .footer, .header
+      display: none
+    .deeplinkQRCode
+      color: #444444
+      border-top: 1px dashed silver
+      width: 100%
+      margin-top: 3em
+      position: relative
+      display: block
+      img
+        width: 4cm
+        height: 4cm
