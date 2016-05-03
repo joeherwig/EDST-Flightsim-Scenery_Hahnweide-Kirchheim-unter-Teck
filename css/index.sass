@@ -18,20 +18,6 @@
         -moz-column-gap: 40px
         column-gap: 40px
         text-align: justify
-      .image
-        -webkit-column-break-inside: avoid
-        page-break-inside: avoid
-        break-inside: avoid
-        width: 100%
-        float: both
-        img
-          position: relative
-          width: 100%
-          & + .caption
-            width: 100%
-            font-variant: small-caps
-            border-bottom: 1px solid silver
-            margin-bottom: 10px
 
     h1
       text-align: left
@@ -39,10 +25,6 @@
         font-weight: bold
     p
       margin-top: 5px
-    p .author, .caption .author
-      font-style: italic
-      margin-left: 1em
-      font-weight: normal
 
 @media all
   .header
@@ -54,6 +36,29 @@
     background-color: rgba(40,60,255,0.9)
     margin-bottom: 10px
     padding: 10px
+  .content
+    .image
+      -webkit-column-break-inside: avoid
+      page-break-inside: avoid
+      break-inside: avoid
+      width: 100%
+      float: both
+      img
+        position: relative
+        width: 100%
+      .caption
+        width: 100%
+        font-variant: small-caps
+        border-bottom: 1px solid silver
+        margin-bottom: 10px
+    p .author, .caption .author
+      font-style: italic
+      margin-left: 1em
+      font-weight: normal
+    p .author::before , .caption .author::before 
+      content: "("
+    p .author::after , .caption .author::after  
+      content: ")"
   .footer
     position: fixed
     bottom: 0px
