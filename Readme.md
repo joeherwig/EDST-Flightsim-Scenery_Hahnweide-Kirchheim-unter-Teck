@@ -3,6 +3,7 @@
 This repository is made to publish and offer a contribution platform for the work on the freeware airfield "Hahnweide" which is located in southern germany, just a few kilometers east of Stuttgart in direct neighbourhood of the suabian alb.
 
 ![ScreenShot](/img/Title.png)
+![ScreenShot](/img/Fliegergruppe.png)
 
 ## Table of contents
 * [Quick start](#quick-start)
@@ -23,7 +24,7 @@ It would be great, if you take part on developing and improving this small VFR a
 If you're not familiar with using Github you can also send me an email to inform me about the changes and additions you made, and i'll probably embed them into my repo.
 
 ## Bugs and feature requests
-Have a bug or a feature request? Please check first whether your problem or idea is addressed already. If not, please feel free to open a new [issue](https://github.com/joeherwig/RealAir-Turbine-Duke-V2-LUA/issues).
+Have a bug or a feature request? Please check first whether your problem or idea is addressed already. If not, please feel free to open a new [issue](https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/issues).
 
 ## Copyright and license
 Code and documentation copyright 2015 JoeHerwig released under [the GPL V2.0 license](LICENSE). Docs released under Creative Commons.
