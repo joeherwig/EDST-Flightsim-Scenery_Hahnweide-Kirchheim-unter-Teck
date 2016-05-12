@@ -10,9 +10,11 @@ html
       input#tab-1(type="radio" name="tab-group" checked="checked")
       label(for="tab-1") Der Platz
       input#tab-2(type="radio" name="tab-group")
-      label(for="tab-2") Die Scenerie
+      label(for="tab-2") Die Szenerie
       input#tab-3(type="radio" name="tab-group") 
       label(for="tab-3") Charts
+      input#tab-4(type="radio" name="tab-group") 
+      label(for="tab-4") Unterst&uuml;tzung
       
       #content
 
@@ -37,25 +39,36 @@ html
             p Das Fliegertreffen findet in der Regel alle zwei Jahre Statt und zieht neben ganz besonderen historischen Flugzeugen und Nachbauten stets auch tausende begeisterte Zuschauer an.
 
         #content-2.tabpanel
-          h2 Die Scenerie
+          h2 Die Szenerie
           p Entwickelt wir die Scenerie aktuell auf Basis von vor Ort aufgenommenen Fotos sowie der Geo-Informationen die aus diversen online verf&uuml;gbaren Luftbildquellen ermittelt werden.
-          .image
-            a(href="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Title.png")
-              img(src="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Title.png")
-            .caption Der Tower mit Haupthangar.
-              span.author joeherwig
-          .image
-            a(href="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Fliegergruppe.png")
-              img(src="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Fliegergruppe.png")
-            .caption Das Fliegerheim der Fliegergruppe Wolf-Hirth.
-              span.author joeherwig
           .cols2
-            p Der Platz ist aktuell noch im entstehen. Leider liegen mir nicht von allen Gebäuden und Objekten am Platz Fotos vor, so dass ich noch mal hin muss, um auch die weiteren Elemente bauen zu können. 
+            p Ausz&uuml;ge aus dem aktuellen Arbeitsstand:
+            .image
+              a(href="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Title.png")
+                img(src="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Title.png")
+              .caption Der Tower mit Haupthangar.
+                span.author joeherwig
+            p Die Screenshots sind noch aus Sketchup.
+            .image
+              a(href="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Fliegergruppe.png")
+                img(src="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Fliegergruppe.png")
+              .caption Das Fliegerheim der Fliegergruppe Wolf-Hirth.
+                span.author joeherwig
+          p Der Platz ist aktuell noch im entstehen. Leider liegen mir nicht von allen Geb&auml;uden und Objekten am Platz Fotos vor, so dass ich noch mal hin muss, um auch die weiteren Elemente bauen zu k&ouml;nnen. 
 
         #content-3.tabpanel
           h2 Charts
           p Da der Platz PPR - und damit f&uuml;r externe Piloten in der Realit&auml;t normalerweise gesperrt ist, muss ich mich mal auf dem Platz nach g&uuml;ltigen Anflugkarten umsehen.
-          
+
+        #content-4.tabpanel
+          h2 Unterst&uuml;tzung
+          p Da sich der Platz aktuell noch mitten in der Entwicklung befindet, freue ich mich &uuml;ber jeden, der Tatkr&auml;ftig an dieser open-source-Scenery mithilft.
+          p
+            a(href="https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck" target="github") Hier 
+            | k&ouml;nnt Ihr euch die Sourcen ziehen und den jeweils aktuellen Bearbeitungsstand abrufen. Wenn Ihr gemeinsam mit mir diesen kleinen Platz in die Simulatoren bringen wollt, freue ich mich &uuml;ber eure kurze Info &uuml;ber die 
+            a(href="https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/issues" target="github") github Issues
+            | .
+
       #blueimp-gallery.blueimp-gallery
         - var prevsymbol = '‹›×'
         .slides
