@@ -2,6 +2,8 @@
 
 This repository is made to publish and offer a contribution platform for the work on the freeware airfield "Hahnweide" which is located in southern germany, just a few kilometers east of Stuttgart in direct neighbourhood of the suabian alb.
 
+See the [website of this project](https://joeherwig.github.io/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/).
+
 ![ScreenShot](/img/Title.png)
 ![ScreenShot](/img/Fliegergruppe.png)
 
