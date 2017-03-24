@@ -21,8 +21,7 @@ html
         document.getElementById('navigation').classList.remove("open");
       };
       // METAR EDDS
-      //fetch('https://avwx.rest/api/metar/edds')
-      fetch('https://avwx.rest/api/metar/eddt')
+      fetch('https://avwx.rest/api/metar/edds')
         .then(function(response) { 
           return response.json();
         })
