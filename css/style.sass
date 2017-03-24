@@ -1,0 +1,157 @@
+navigation
+  transition: all 0.5s linear
+  display: flex
+  flex-flow: row wrap
+  justify-content: space-between
+  padding: 1rem 2rem 0.5rem 2rem
+  margin: 0px
+  background: rgb(255, 255, 255)
+  border-bottom: 1px solid #dedede
+  position: fixed
+  z-index: 100
+  left: 0px
+  right: 0px
+  top: 0px
+  item
+    border-radius: 0.5rem
+    border: 1px solid silver
+    display: block
+    flex: 1 0 auto
+    max-width: 150px
+    padding: 0.5rem
+    text-align: center
+    transform: skewX(-45deg)
+    margin: 5px 5px 0px 5px
+    &:nth-child(0)
+      padding-left: 100px
+    &.current
+      background: silver
+    span
+      display: block
+      transform: skewX(45deg)
+  .nav-pull-right
+    margin-left: auto
+  item:hover
+    background: lightblue
+  item.current:hover
+    background: silver
+
+#collapse-bar
+  display: block
+  height: 0px
+  width: 100%
+
+body:after
+  background: url(../images/bg-vfr-chart.png)
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  content: ""
+  position: absolute
+  z-index: -1
+  opacity: 0.1
+.page
+  background: rgba(255,255,255,0.8)
+  box-shadow: 0px 0px 25px #888888
+  display: none
+  left: auto
+  margin-left: auto
+  margin-right: auto
+  margin-top: 6rem
+  max-width: 1000px
+  padding: 20px
+  position: relative
+  right: auto
+  & *
+    max-width: 100%
+.current
+  display: block
+
+
+a[href$=".pdf"]:after
+  content: ""
+  display: inline-block
+  width: 100px
+  height: 100px
+  //background: url('/images/pdf.svg') no-repeat 0 0
+
+@media screen and (min-width: 1001px)
+  .page-logo
+    content: url(../images/J3D-Icon.svg)
+    position: fixed !important
+    z-index: 200
+    left: 10
+    height: 80px
+    margin-top: -90px !important
+  navigation
+    item:nth-child(1)
+      margin-left: 100px
+  #collapse-bar
+    span:not(.page-logo), .menu-icon
+      display: none
+
+
+@media screen and (max-width: 1000px)
+  navigation
+    & *
+      transition: all 0.25s ease
+    display: flex
+    flex-flow: column wrap
+    transform: translate(-1100px, 0px)
+    box-shadow: 0px 0px 10px #000
+    item
+      border: none
+      border-bottom: 1px solid skyblue
+      border-radius: 0px
+      display: block
+      flex: 1
+      height: 1.5rem
+      margin: auto
+      margin-bottom: 0.25rem
+      max-width: 100%
+      padding: 0.5rem
+      position: relative
+      text-align: center
+      transform: skewX(-45deg)
+      transform: translate(-1010, 0px)
+      width: 90%
+      &:hover, &:focus, &:active
+        border-radius: 0.5rem
+      &:nth-child(0)
+        padding-left: 0px
+      &.current
+        background: silver
+        border-radius: 0.5rem
+
+      span
+        display: block
+        transform: skewX(45deg)
+  navigation.open
+    transform: translate(0px, 0px)
+  #collapse-bar
+    background: lightskyblue
+    border-radius: 0px
+    display: flex
+    height: 30px
+    padding: 10px 20px 10px 20px
+    position: fixed
+    right: 0px
+    left: 0px
+    top: 0px
+    width: auto
+    z-index: 50
+    box-shadow: 0px 0px 10px #000
+    justify-content: space-between
+    align-items: center
+    & *
+      flex: 1
+    .menu-icon
+      text-align: right
+  .page
+    margin-top: 3rem
+.page-logo
+  content: url(../images/J3D-Icon.svg)
+  position: relative
+  height: 70px
+  margin-top: 30px
