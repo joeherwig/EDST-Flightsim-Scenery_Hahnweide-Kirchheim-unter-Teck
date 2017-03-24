@@ -16,26 +16,22 @@
       });*/
       
       function setActivePage(pageID) {
-        console.log('activating: '+pageID)
         let pages = document.querySelectorAll('.page[id]').forEach(function(page) {
           document.getElementById(page.id).classList.remove("current");
-      
         })
         document.getElementById(pageID).classList.add("current");
       
         let navs = document.querySelectorAll('navigation item[id]').forEach(function(nav) {
           document.getElementById(nav.id).classList.remove("current");
-      
         })
         document.getElementById(pageID+'-nav').classList.add("current");
         document.getElementById('navigation').classList.remove("open");
       };
       
-      // Build Navigation based on available pages. All Pages with explicitly set id are put to the navigation.
       document.addEventListener('DOMContentLoaded', function() {
         let listOfPages = '';
         let allpages = document.querySelectorAll('.page[id]').forEach(function(page) {
-          let headlines = page.querySelectorAll('.page>h1:first-child, .page:not(h1)>h2:first-child, .page:not(h1):not(h2)>h3:first-child').forEach(function(pagetitle){
+          let headlines = page.querySelectorAll('.page>.nav-label:first-child, .page:not(.nav-label)>h1:first-child, .page:not(.nav-label):not(h1)>h2:first-child, .page:not(.nav-label):not(h1):not(h2)>h3:first-child').forEach(function(pagetitle){
             
             let pullright = page.classList.contains('nav-pull-right');
             if (pullright) {
@@ -47,8 +43,6 @@
         })
         document.getElementById('navigation').innerHTML = listOfPages
         setActivePage(document.querySelector('.page[id]').id);
-      
-        console.log(listOfPages);
       });
       
     </script>
@@ -101,6 +95,12 @@
         </div>
         <p>Der Platz ist aktuell noch im entstehen. Leider liegen mir nicht von allen Geb&auml;uden und Objekten am Platz Fotos vor, so dass ich noch mal hin muss, um auch die weiteren Elemente bauen zu k&ouml;nnen. </p>
       </div>
+      <div id="Download" class="page">
+        <div class="nav-label">Installation</div>
+        <h1>Download und Installation</h1>
+        <p>Die Basis-Dateien f&uuml;r den Platz liegen derzeit noch unter <a href="https://library.avsim.net/search.php?CatID=root&amp;SearchTerm=edst&amp;Sort=Name&amp;ScanMode=0&amp;Go=Change+View" target="avsim">avsim</a> und m&uuml;ssen dort aus mehreren Downloads &amp; Patches zusammengebaut werden.</p>
+        <p>Da wir einige Libraries mit Zustimmung deren Autoren verwendet haben, sollten diese ebenfalls heruntergeladen und installiert werden, damit der Platz noch belebter wird.</p>
+      </div>
       <div id="reality" class="page">
         <h1>Der Platz</h1>
         <p>Die Hahnweide ist ein kleiner Flugplatz &ouml;stlich von Stuttgart im S&uuml;den Deutschlands, direkt am Rande der Schw&auml;bischen Alb. Der Platz beheimatet gleich mehrere Vereine sowie die Flugschule des Baden-W&uuml;rttembergischen Luftfahrt Verbands e. V.</p>
@@ -127,8 +127,8 @@
       </div>
       <div id="chapter5" class="page nav-pull-right">
         <h1>Unterst&uuml;tzung</h1>
-        <p>Da sich der Platz aktuell noch mitten in der Entwicklung befindet, freue ich mich &uuml;ber jeden, der Tatkr&auml;ftig an dieser open-source-Scenery mithilft.</p>
-        <p><a href="https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck" target="github">Hier </a>k&ouml;nnt Ihr euch die Sourcen ziehen und den jeweils aktuellen Bearbeitungsstand abrufen. Wenn Ihr gemeinsam mit mir diesen kleinen Platz in die Simulatoren bringen wollt, freue ich mich &uuml;ber eure kurze Info &uuml;ber die <a href="https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/issues" target="github">github Issues</a>.</p>
+        <p>Bedanken m&ouml;chte ich mich bei Wolfgang Allers, der auf Basis einiger von mir erstellter Objekte mit viel Engagement und Zeit den Platz zwischenzeitlich fertig gestellt hat.</p>
+        <p><a href="https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck" target="github">Hier</a> k&ouml;nnt Ihr euch die Sourcen ziehen und den jeweils aktuellen Bearbeitungsstand abrufen. Wenn Ihr gemeinsam mit mir diesen kleinen Platz in die Simulatoren bringen wollt, freue ich mich &uuml;ber eure kurze Info &uuml;ber die <a href="https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/issues" target="github">github Issues</a>.</p>
       </div>
     </div>
   </body>
