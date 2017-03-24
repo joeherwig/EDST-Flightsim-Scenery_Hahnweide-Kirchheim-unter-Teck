@@ -5,15 +5,9 @@ html
     link(rel='stylesheet', href='css/style.css')
     script.
       NodeList.prototype.forEach = Array.prototype.forEach;
-
-      /*fetch('https://avwx.rest/api/metar/edds')
-        .then(function(response) { 
-          return response.json();
-        })
-        .then(function(j) {
-          console.log(j);
-      });*/
-
+      let sun = {};
+      let metar = {};
+      
       function setActivePage(pageID) {
         let pages = document.querySelectorAll('.page[id]').forEach(function(page) {
           document.getElementById(page.id).classList.remove("current");
@@ -26,12 +20,46 @@ html
         document.getElementById(pageID+'-nav').classList.add("current");
         document.getElementById('navigation').classList.remove("open");
       };
+      // METAR EDDS
+      //fetch('https://avwx.rest/api/metar/edds')
+      fetch('https://avwx.rest/api/metar/eddt')
+        .then(function(response) { 
+          return response.json();
+        })
+        .then(function(j) {
+          metar = '<h2>Metar</h2>';
+          metar+= '<div>Raw</div><div>'+j["Raw-Report"]+''+'</div>';
+          metar+= '<div>Station</div><div>'+j.Station+''+'</div>';
+          metar+= '<div>Wind-Direction</div><div>'+j["Wind-Direction"]+'&deg;</div>';
+          metar+= '<div>Wind-Speed</div><div>'+j["Wind-Speed"]+' '+j.Units["Wind-Speed"]+'</div>';
+          metar+= '<div>Wind-Gust</div><div>'+j["Wind-Gust"]+'</div>';
+          metar+= '<div>Visibility</div><div>'+j.Visibility+''+'</div>';
+          metar+= '<div>Clouds:</div><div>';
+          Object.keys(j["Cloud-List"]).forEach(function(k){
+            //console.log('1st: '+j["Cloud-List"][k]);
+            Object.keys(j["Cloud-List"][k]).forEach(function(level){
+              metar += j["Cloud-List"][k][level]+' ';
+            });
+            metar += '<br/>';
+          });
+          metar+= '</div>';
+          metar+= '<div>Altimeter</div><div>'+j.Altimeter+' '+j.Units.Altimeter+'</div>';
+          document.querySelector('.currentsituation>.metar').innerHTML = metar;  
+      });
+      // sunrise-sunset
+      //fetch('http://api.sunrise-sunset.org/json?lat=48.631944&lng=9.430556&date=today&formatted=0')
+      fetch('http://api.sunrise-sunset.org/json?lat=48.631944&lng=9.430556&date=today&formatted=1')
+        .then(function(response) { 
+          return response.json();
+        })
+        .then(function(sun) {
+          document.querySelector('.sun').innerHTML = '<div>Sunrise</div><div>'+sun.results.sunrise+'</div><div>Sunset</div><div>'+sun.results.sunset+'</div>';  
+      });
 
       document.addEventListener('DOMContentLoaded', function() {
         let listOfPages = '';
         let allpages = document.querySelectorAll('.page[id]').forEach(function(page) {
           let headlines = page.querySelectorAll('.page>.nav-label:first-child, .page:not(.nav-label)>h1:first-child, .page:not(.nav-label):not(h1)>h2:first-child, .page:not(.nav-label):not(h1):not(h2)>h3:first-child').forEach(function(pagetitle){
-            
             let pullright = page.classList.contains('nav-pull-right');
             if (pullright) {
               listOfPages += "<item id='"+page.id+"-nav' onclick='setActivePage(\""+page.id+"\");' class='nav-pull-right'><span>"+pagetitle.innerText+"</span></item>";
@@ -39,6 +67,7 @@ html
               listOfPages += "<item id='"+page.id+"-nav' onclick='setActivePage(\""+page.id+"\");'><span>"+pagetitle.innerText+"</span></item>";
             };
           })
+
         })
         document.getElementById('navigation').innerHTML = listOfPages
         setActivePage(document.querySelector('.page[id]').id);
@@ -70,61 +99,101 @@ html
     .pages
       
       //  List here all pages you want to have in your responstive single-page-app
-      .page#chapter1
-        h1 Die Szenerie
-        p Entwickelt wir die Scenerie aktuell auf Basis von vor Ort aufgenommenen Fotos sowie der Geo-Informationen die aus diversen online verf&uuml;gbaren Luftbildquellen ermittelt werden.
-        .cols2
-          p Ausz&uuml;ge aus dem aktuellen Arbeitsstand:
-          .image
-            a(href="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Title.png")
-              img(src="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Title.png")
-            .caption Der Tower mit Haupthangar.
-              span.author joeherwig
-          p Die Screenshots sind noch aus Sketchup.
-          .image
-            a(href="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Fliegergruppe.png")
-              img(src="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Fliegergruppe.png")
-            .caption Das Fliegerheim der Fliegergruppe Wolf-Hirth.
-              span.author joeherwig
-        p Der Platz ist aktuell noch im entstehen. Leider liegen mir nicht von allen Geb&auml;uden und Objekten am Platz Fotos vor, so dass ich noch mal hin muss, um auch die weiteren Elemente bauen zu k&ouml;nnen. 
-      
-      .page#Download
-        .nav-label Installation
-        h1 Download und Installation
-        p Die Basis-Dateien f&uuml;r den Platz liegen derzeit noch unter 
-          a(href="https://library.avsim.net/search.php?CatID=root&SearchTerm=edst&Sort=Name&ScanMode=0&Go=Change+View" target="avsim") avsim
-          |  und m&uuml;ssen dort aus mehreren Downloads &amp; Patches zusammengebaut werden.
-        p Da wir einige Libraries mit Zustimmung deren Autoren verwendet haben, sollten diese ebenfalls heruntergeladen und installiert werden, damit der Platz noch belebter wird.
-
       .page#reality
-        h1 Der Platz
-        p Die Hahnweide ist ein kleiner Flugplatz &ouml;stlich von Stuttgart im S&uuml;den Deutschlands, direkt am Rande der Schw&auml;bischen Alb. Der Platz beheimatet gleich mehrere Vereine sowie die Flugschule des Baden-W&uuml;rttembergischen Luftfahrt Verbands e. V.
+        .nav-label Der Platz
+        h1 Die Hahnweide bei Kirchheim/Teck
+        p Die Hahnweide ist ein kleiner Flugplatz ca. 17nm &ouml;stlich von Stuttgart im S&uuml;den Deutschlands, direkt am Rande der Schw&auml;bischen Alb. Der Platz beheimatet gleich mehrere Vereine sowie die Flugschule des Baden-W&uuml;rttembergischen Luftfahrt Verbands e. V.
         .cols2
           h3 Die Lage
           p Obwohl die Hahnweide aufgrund von L&auml;rmschutzvorgaben unterj&auml;hrig nur f&uuml;r die am Platz beheimateten Vereine per Motorflug genutzt werden kann, bietet die Hahnweide aufgrund seiner N&auml;he zum Albtrauf und zur nahe gelegenen Stadt Stuttgart viele reizvolle M&ouml;glichkeiten f&uuml;r tolle Fl&uuml;ge in die Umgebung.
-          //.image
-            a(href="http://nordenflieger.de/bilder/VFR/EDST_Hahnweide_real.jpg")
+          //figure
+            a(href="http://nordenflieger.de/bilder/VFR/EDST_Hahnweide_real.jpg" target="figure")
               img(src="http://nordenflieger.de/bilder/VFR/EDST_Hahnweide_real.jpg")
-            .caption Die Hahnweide aus der Luft Blick Richtung Osten.
+            figcaption Die Hahnweide aus der Luft Blick Richtung Osten.
               span.author friesenflieger.eu
           h3 Besonderheiten
           p Bekannt ist die Hahnwiede insbesondere bei Liebhabern klassischer Flugzeuge aufgrund des in der Regel alle zwei Jahre stattfindenden Oldtimer Fliegertreffens.
-          .image
-            a(href="http://www.teckbote.de/cms_media/module_img/42/21470_1_articleorg_544eeb1f889f2.jpg")
+          figure
+            a(href="http://www.teckbote.de/cms_media/module_img/42/21470_1_articleorg_544eeb1f889f2.jpg" target="figure")
               img(src="http://www.teckbote.de/cms_media/module_img/42/21470_1_articleorg_544eeb1f889f2.jpg")
-            .caption Oldtimer-Treffen.
+            figcaption Oldtimer-Treffen.
               span.author teckbote.de
           p Das Fliegertreffen findet in der Regel alle zwei Jahre Statt und zieht neben ganz besonderen historischen Flugzeugen und Nachbauten stets auch tausende begeisterte Zuschauer an.
-      
-      .page#chapter4
+          .currentsituation
+            .metar
+            .sun
+        p Weiter 
+          a(href="#" onclick="setActivePage('scenery')")  zur Szenerie
+
+      .page#scenery
+        h1 Die Szenerie
+        p Die Szenerie ist sehr detailliert gestaltet. Alle wichtigen Objekte wurden von uns nach Originalfotos neu erstellt. Die Umgebung wurde per Landklassen den realen Gegebenheiten angepasst. Ein retuschierter Photohintergrund, der alle vier Jahreszeiten abdeckt, rundet das Gesamtbild ab. Die Hahnweide existiert in FSX und Prepar3D als Standardflugplatz nicht, ist also eine echte AddonSzenerie, die einen wei&szlig;en Fleck auf der Simulator-Karte ausf&uuml;llt. Da der Platz nicht eben sondern eher eine &quot;rumpelige&quot; Wiese, ist das Design entsprechend gestaltet. Es gibt demzufolge also keine planen Pisten. Aus dem Grund ist es wichtig, die Anzeigeeinstellungen im FSX entsprechend einzustellen, n&auml;mlich auf eine Musteraufl&ouml;sung von 5 Metern.
+        p Entwickelt wurde die Scenerie auf Basis von 2016 vor Ort aufgenommenen Fotos sowie Geo-Informationen die aus diversen verf&uuml;gbaren Luftbildquellen ermittelt wurden.
+        h2 Medien
+        p Damit Ihr absch&auml;tzen k&ouml;nnt, ob sich der Download f&uuml;r euch lohnt, anbei einige Medien:
+        figure
+          a(href="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Title.png" target="figure")
+            img(src="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Title.png")
+          figcaption Der Tower mit Haupthangar.
+            span.author joeherwig
+        p Die Screenshots sind noch aus Sketchup.
+        figure
+          a(href="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Fliegergruppe.png" target="figure")
+            img(src="https://raw.githubusercontent.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/master/img/Fliegergruppe.png" target="figure")
+          figcaption Das Fliegerheim der Fliegergruppe Wolf-Hirth.
+            span.author joeherwig
+        p Auf geht's zu 
+          a(href="#" onclick="setActivePage('Download')") Download &amp; Installation
+        
+      .page#Download
+        .nav-label Installation
+        h1 Download und Installation
+        h2 Libraries 
+        p Viele kleinere Objekte, wie Leute, Autos oder statische Flugzeuge in dieser Szenerie wurden drei verbreiteten Freeware-Libraries entnommen, f&uuml;r deren Verwendung wir die freundliche Genehmigung der Autoren erhalten haben. Wenn diese Libraries nicht installiert sind, sind viele Objekte nicht sichtbar!
+        p Damit alles sauber funktioniert und alle Objekte dargestellt werden, solltet Ihr in der folgenden Reihenfolge installieren:
+        ol
+          li FS-Piloten_Objektlibrary: 
+            br
+            a(href="http://www.fs-piloten.de/thread.php?threadid=1063" target="libraries") http://www.fs-piloten.de/thread.php?threadid=1063 
+          li FSX_FlightPortLib 
+            br
+            a(href="http://www.flightport.de/libraries/flightport-library/" target="libraries") http://www.flightport.de/libraries/flightport-library/
+          li 3d People Library 
+            br
+            a(href="http://library.avsim.net/download.php?DLID=192454" target="libraries") http://library.avsim.net/download.php?DLID=192454
+          li 
+            a(href="https://library.avsim.net/search.php?SearchTerm=EDST+Germany+v1.2&CatID=root&Go=Search" target="libraries") Der PLATZ selbst
+        p Grundstzlich sollten Libraries recht weit unten in der Hierarchie der scenery.cfg eingebunden werden. Nach M&ouml;glichkeit unterhalb der Addon-Szenerie, weil die Library-Objekte sonst unter Umst&auml;nden vom Simulator nicht gefunden werden. Daher empfehlen wir zun&auml;chst die Libs zu installieren, und erst im Anschluss die Scenery.
+        p Die Basis-Dateien f&uuml;r den Platz selbst liegen derzeit noch unter 
+          a(href="https://library.avsim.net/search.php?SearchTerm=EDST+Germany+v1.2&CatID=root&Go=Search" target="avsim") avsim
+          |  und m&uuml;ssen dort aus mehreren Downloads &amp; Patches zusammengebaut werden.
+        p Egal ob dir die Scenery gef&auml;llt, oder Du noch was zu verbessern hast, Du kannst uns gern
+          a(href="#" onclick="setActivePage('support')")  unterst&uuml;tzen
+          | .
+
+      //.page#chapter4
         h1 Charts
         p Da der Platz PPR - und damit f&uuml;r externe Piloten in der Realit&auml;t normalerweise gesperrt ist, muss ich mich mal auf dem Platz nach g&uuml;ltigen Anflugkarten umsehen.
 
-      .page#chapter5.nav-pull-right
+      .page#support.nav-pull-right
         h1 Unterst&uuml;tzung
         p Bedanken m&ouml;chte ich mich bei Wolfgang Allers, der auf Basis einiger von mir erstellter Objekte mit viel Engagement und Zeit den Platz zwischenzeitlich fertig gestellt hat.
         p
           a(href="https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck" target="github") Hier
-          |  k&ouml;nnt Ihr euch die Sourcen ziehen und den jeweils aktuellen Bearbeitungsstand abrufen. Wenn Ihr gemeinsam mit mir diesen kleinen Platz in die Simulatoren bringen wollt, freue ich mich &uuml;ber eure kurze Info &uuml;ber die 
+          |  k&ouml;nnt Ihr die Sourcen ziehen und den jeweils aktuellen Bearbeitungsstand abrufen. Wenn Ihr Fehler findet, oder Anregungen habt, bitte einfach eine kurze Info &uuml;ber die 
           a(href="https://github.com/joeherwig/EDST-Flightsim-Scenery_Hahnweide-Kirchheim-unter-Teck/issues" target="github") github Issues
-          | .
+          |  des Repositories.
+        p Auch wenn ihr nicht am Code etwas Beitragen k&ouml;nnt oder wollt, so habt ihr die M&ouml;glichkeit die Entwicklung solcher Freeware zu unterst&uuml;tzen - denn Ihr k&ouml;nnt 
+          form(action='https://www.paypal.com/cgi-bin/webscr', method='post', target='_top')
+            input(type='hidden', name='cmd', value='_donations')
+            input(type='hidden', name='business', value='joachim.herwig@gmx.net')
+            input(type='hidden', name='lc', value='DE')
+            input(type='hidden', name='item_name', value='Joachim Herwig J3D')
+            input(type='hidden', name='item_number', value='EDST Hahnweide Scenery')
+            input(type='hidden', name='no_note', value='0')
+            input(type='hidden', name='currency_code', value='EUR')
+            input(type='hidden', name='bn', value='PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest')
+            input(type='image', src='https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donate_SM.gif', border='0', name='submit', alt='Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.')
+            img(alt='', border='0', src='https://www.paypalobjects.com/de_DE/i/scr/pixel.gif', width='1', height='1')
+        p Besten Dank, 
+        p &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euer Joachim Herwig und Wolfgang Allers
