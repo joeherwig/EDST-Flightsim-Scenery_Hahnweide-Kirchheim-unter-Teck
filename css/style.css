@@ -102,8 +102,10 @@ a[href]:after {
   font-family: "FontAwesome";
   content: " 🔗"; }
 
-figure a:after {
-  content: "" !important; }
+figure {
+  display: inline-block; }
+  figure a:after {
+    content: "" !important; }
 
 .currentsituation h2 {
   text-align: center;
