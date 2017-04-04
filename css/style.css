@@ -50,7 +50,7 @@ navigation {
   display: none; }
 
 body:after {
-  background: url(../images/bg-vfr-chart.png);
+  background: url(../images/bg-vfr-chart.jpg) no-repeat center center fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -58,8 +58,8 @@ body:after {
   content: "";
   position: fixed;
   z-index: -1;
-  opacity: 0.1;
-  background-repeat: repeat; }
+  background-repeat: repeat;
+  background-size: cover; }
 
 .page {
   background: rgba(255, 255, 255, 0.8);
