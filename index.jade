@@ -2,106 +2,11 @@ html
   head
     title EDST Hahnweide Kirchheim unter Teck
     meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(href="/manifest.json" rel="manifest")
     link(rel='stylesheet', href='css/style.css')
+    script(src="https://hammerjs.github.io/dist/hammer.js")
+    script(type="text/javascript" src="js/index.js")
     script.
-      NodeList.prototype.forEach = Array.prototype.forEach;
-      let sun = {};
-      let metar = {};
-      
-      function setActivePage(pageID) {
-        let pages = document.querySelectorAll('.page[id]').forEach(function(page) {
-          document.getElementById(page.id).classList.remove("current");
-        })
-        document.getElementById(pageID).classList.add("current");
-
-        let navs = document.querySelectorAll('navigation item[id]').forEach(function(nav) {
-          document.getElementById(nav.id).classList.remove("current");
-        })
-        document.getElementById(pageID+'-nav').classList.add("current");
-        document.getElementById('navigation').classList.remove("open");
-      };
-      // METAR EDDS
-      fetch('https://avwx.rest/api/metar/edds')
-        .then(function(response) { 
-          return response.json();
-        })
-        .then(function(j) {
-          metar = '<h2>Metar</h2>';
-          metar+= '<div>Raw</div><div>'+j["Raw-Report"]+''+'</div>';
-          metar+= '<div>Station</div><div>'+j.Station+'</div>';
-          metar+= '<div>METAR Zeit</div><div>'+j.Time.substr(2,2)+':'+j.Time.substr(4,2)+' UTC</div>';
-          metar+= '<div>Flight-Rules</div><div>'+j["Flight-Rules"]+''+'</div>';
-          metar+= '<div>Altimeter</div><div>'+j.Altimeter+' '+j.Units.Altimeter+'</div>';
-          metar+= '<div>Dewpoint</div><div>'+j.Dewpoint*1+' &deg;'+j.Units.Temperature+'</div>';
-          metar+= '<div>Temperature</div><div>'+j.Temperature*1+' &deg;'+j.Units.Temperature+'</div>';
-          metar+= '<div>Wind-Direction</div><div>'+j["Wind-Direction"]*1+' &deg;</div>';
-          metar+= '<div>Wind-Speed</div><div>'+j["Wind-Speed"]*1+' '+j.Units["Wind-Speed"]+'</div>';
-          metar+= '<div>Wind-Gust</div><div>'+j["Wind-Gust"]*1+'</div>';
-          Object.keys(j["Wind-Variable-Dir"]).forEach(function(k){
-            //console.log('1st: '+j["Cloud-List"][k]);
-            Object.keys(j["Wind-Variable-Dir"][k]).forEach(function(level){
-                metar += j["Wind-Variable-Dir"][k][level]+' ';
-            });
-            metar += '<br/>';
-          });
-
-          metar+= '<div>Visibility</div><div>'+j.Visibility+''+'</div>';
-          metar+= '<div>Clouds:</div><div>';
-          Object.keys(j["Cloud-List"]).forEach(function(k){
-            //console.log('1st: '+j["Cloud-List"][k]);
-            Object.keys(j["Cloud-List"][k]).forEach(function(level){
-              if (j["Cloud-List"][k][level] === 'CLR') {
-                metar += '<svg class="icon icon-clouds_clr"><use xlink:href="#icon-clouds_clr"/></svg> '
-              } else if (j["Cloud-List"][k][level] === 'SKC') {
-                metar += '<svg class="icon icon-clouds_skc"><use xlink:href="#icon-clouds_skc"/></svg> '
-              } else if (j["Cloud-List"][k][level] === 'SCT') {
-                metar += '<svg class="icon icon-clouds_sct"><use xlink:href="#icon-clouds_sct"/></svg> '
-              } else if (j["Cloud-List"][k][level] === 'FEW') {
-                metar += '<svg class="icon icon-clouds_few"><use xlink:href="#icon-clouds_few"/></svg> '
-              } else if (j["Cloud-List"][k][level] === 'BKN') {
-                metar += '<svg class="icon icon-clouds_bkn"><use xlink:href="#icon-clouds_bkn"/></svg> '
-              } else if (j["Cloud-List"][k][level] === 'OVC') {
-                metar += '<svg class="icon icon-clouds_ovc"><use xlink:href="#icon-clouds_ovc"/></svg> '
-              } else if (j["Cloud-List"][k][level] === 'OVX') {
-                metar += '<svg class="icon icon-clouds_ovx"><use xlink:href="#icon-clouds_ovx"/></svg> '
-              } else {
-                metar += ' FL ';
-                metar += j["Cloud-List"][k][level]+' ';
-              }
-            });
-            metar += '<br/>';
-          });
-          metar+= '</div>';
-          //metar+= '<div>Altimeter</div><div>'+j.Altimeter+' '+j.Units.Altimeter+'</div>';
-          rawmetar = j;
-          document.querySelector('.currentsituation>.metar').innerHTML = metar;  
-      });
-      // sunrise-sunset
-      //fetch('http://api.sunrise-sunset.org/json?lat=48.631944&lng=9.430556&date=today&formatted=0')
-      fetch('http://api.sunrise-sunset.org/json?lat=48.631944&lng=9.430556&date=today&formatted=1')
-        .then(function(response) { 
-          return response.json();
-        })
-        .then(function(sun) {
-          document.querySelector('.sun').innerHTML = '<div>Sunrise</div><div>'+sun.results.sunrise+'</div><div>Sunset</div><div>'+sun.results.sunset+'</div>';  
-      });
-
-      document.addEventListener('DOMContentLoaded', function() {
-        let listOfPages = '';
-        let allpages = document.querySelectorAll('.page[id]').forEach(function(page) {
-          let headlines = page.querySelectorAll('.page>.nav-label:first-child, .page:not(.nav-label)>h1:first-child, .page:not(.nav-label):not(h1)>h2:first-child, .page:not(.nav-label):not(h1):not(h2)>h3:first-child').forEach(function(pagetitle){
-            let pullright = page.classList.contains('nav-pull-right');
-            if (pullright) {
-              listOfPages += "<item id='"+page.id+"-nav' onclick='setActivePage(\""+page.id+"\");' class='nav-pull-right'><span>"+pagetitle.innerText+"</span></item>";
-            } else {
-              listOfPages += "<item id='"+page.id+"-nav' onclick='setActivePage(\""+page.id+"\");'><span>"+pagetitle.innerText+"</span></item>";
-            };
-          })
-
-        })
-        document.getElementById('navigation').innerHTML = listOfPages
-        setActivePage(document.querySelector('.page[id]').id);
-      });
 
   body
     svg(style='position: absolute; width: 0; height: 0; overflow: hidden;', version='1.1', xmlns='http://www.w3.org/2000/svg')
@@ -151,9 +56,11 @@ html
 
 
     .pages
-      
+      .swipeindicator
+        .previous  
+        .next
       //  List here all pages you want to have in your responstive single-page-app
-      .page#reality
+      .page
         .nav-label Der Platz
         h1 Die Hahnweide bei Kirchheim/Teck
         p Die Hahnweide ist ein kleiner Flugplatz ca. 17nm &ouml;stlich von Stuttgart im S&uuml;den Deutschlands, direkt am Rande der Schw&auml;bischen Alb. Der Platz beheimatet gleich mehrere Vereine sowie die Flugschule des Baden-W&uuml;rttembergischen Luftfahrt Verbands e. V.
@@ -179,7 +86,7 @@ html
         p Weiter 
           a(href="#" onclick="setActivePage('scenery')")  zur Szenerie
 
-      .page#scenery
+      .page
         h1 Die Szenerie
         p Die Szenerie ist sehr detailliert gestaltet. Alle wichtigen Objekte wurden von uns nach Originalfotos neu erstellt. Die Umgebung wurde per Landklassen den realen Gegebenheiten angepasst. Ein retuschierter Photohintergrund, der alle vier Jahreszeiten abdeckt, rundet das Gesamtbild ab. Die Hahnweide existiert in FSX und Prepar3D als Standardflugplatz nicht, ist also eine echte AddonSzenerie, die einen wei&szlig;en Fleck auf der Simulator-Karte ausf&uuml;llt. Da der Platz nicht eben sondern eher eine &quot;rumpelige&quot; Wiese, ist das Design entsprechend gestaltet. Es gibt demzufolge also keine planen Pisten. Aus dem Grund ist es wichtig, die Anzeigeeinstellungen im FSX entsprechend einzustellen, n&auml;mlich auf eine Musteraufl&ouml;sung von 5 Metern.
         p Entwickelt wurde die Scenerie auf Basis von 2016 vor Ort aufgenommenen Fotos sowie Geo-Informationen die aus diversen verf&uuml;gbaren Luftbildquellen ermittelt wurden.
@@ -203,7 +110,7 @@ html
         p Auf geht's zu 
           a(href="#" onclick="setActivePage('Download')") Download &amp; Installation
         
-      .page#Download
+      .page
         .nav-label Installation
         h1 Download und Installation
         h2 Libraries 
@@ -229,11 +136,7 @@ html
           a(href="#" onclick="setActivePage('support')")  unterst&uuml;tzen
           | .
 
-      //.page#chapter4
-        h1 Charts
-        p Da der Platz PPR - und damit f&uuml;r externe Piloten in der Realit&auml;t normalerweise gesperrt ist, muss ich mich mal auf dem Platz nach g&uuml;ltigen Anflugkarten umsehen.
-
-      .page#support.nav-pull-right
+      .page.nav-pull-right
         h1 Unterst&uuml;tzung
         p Bedanken m&ouml;chte ich mich bei Wolfgang Allers, der auf Basis einiger von mir erstellter Objekte mit viel Engagement und Zeit den Platz zwischenzeitlich fertig gestellt hat.
         p

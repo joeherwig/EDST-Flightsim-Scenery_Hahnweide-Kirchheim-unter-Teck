@@ -1,0 +1,36 @@
+{
+  "name": "EDST Hahnweide Flightsim-Scenery",
+  "short_name": "EDST freeware scenery",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "lightskyblue",
+  "description": "The Freeware Scenery EDST Hahnweide Kirchheim (Teck) built for your flight simulator.",
+  "icons": [{
+    "src": "/images/J3D-Icon.svg",
+    "sizes": "48x48",
+    "type": "image/svg"
+  }, {
+    "src": "/images/J3D-Icon.svg",
+    "sizes": "72x72",
+    "type": "image/svg"
+  }, {
+    "src": "/images/J3D-Icon.svg",
+    "sizes": "96x96",
+    "type": "image/svg"
+  }, {
+    "src": "/images/J3D-Icon.svg",
+    "sizes": "144x144",
+    "type": "image/svg"
+  }, {
+    "src": "/images/J3D-Icon.svg",
+    "sizes": "168x168",
+    "type": "image/svg"
+  }, {
+    "src": "/images/J3D-Icon.svg",
+    "sizes": "192x192",
+    "type": "image/svg"
+  }],
+  "related_applications": [{
+    "platform": "web"
+  }]
+}

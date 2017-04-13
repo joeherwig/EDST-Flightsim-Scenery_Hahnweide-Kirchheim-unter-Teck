@@ -102,6 +102,11 @@ a[href]:after {
   font-family: "FontAwesome";
   content: " 🔗"; }
 
+.rawdata {
+  font-size: small;
+  margin: 1em 0em 1em 0em;
+  font-family: monospace; }
+
 figure {
   display: inline-block; }
   figure a:after {
