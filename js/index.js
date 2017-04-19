@@ -35,8 +35,8 @@ fetch('https://avwx.rest/api/metar/edds')
     metar+= '<div>Wind-Direction</div><div>'+j["Wind-Direction"]*1+'&deg;';
     //Object.keys(j["Wind-Variable-Dir"]).forEach(function(k){
     if (j["Wind-Variable-Dir"][0] !== false) {
-      metar += ' ( ' + j["Wind-Variable-Dir"][0] + '&deg; - '
-      metar += j["Wind-Variable-Dir"][1]+'&deg; )';
+      metar += ' ( ' + j["Wind-Variable-Dir"][0] + '&deg; - ';
+      metar += j["Wind-Variable-Dir"][1] + '&deg; )';
     }
     //});          
     metar += '</div>'
