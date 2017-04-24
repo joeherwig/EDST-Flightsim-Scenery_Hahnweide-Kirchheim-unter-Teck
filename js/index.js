@@ -30,10 +30,13 @@ fetch('https://avwx.rest/api/metar/edds')
     metar+= '<div>METAR Zeit</div><div>'+j.Time.substr(2,2)+':'+j.Time.substr(4,2)+' UTC</div>';
     metar+= '<div>Flight-Rules</div><div>'+j["Flight-Rules"]+''+'</div>';
     metar+= '<div>Altimeter</div><div>'+j.Altimeter+' '+j.Units.Altimeter+'</div>';
-    metar+= '<div>Dewpoint</div><div>'+j.Dewpoint*1+' &deg;'+j.Units.Temperature+'</div>';
-    metar+= '<div>Temperature</div><div>'+j.Temperature*1+' &deg;'+j.Units.Temperature+'</div>';
-    metar+= '<div>Wind-Direction</div><div>'+j["Wind-Direction"]*1+'&deg;';
-    //Object.keys(j["Wind-Variable-Dir"]).forEach(function(k){
+    metar+= '<div>Dewpoint</div><div>'+j.Dewpoint.replace("M","-")*1+' &deg;'+j.Units.Temperature+'</div>';
+    metar+= '<div>Temperature</div><div>'+j.Temperature.replace("M","-")*1+' &deg;'+j.Units.Temperature+'</div>';
+    if (typeof j["Wind-Direction"] === "string") {
+      metar+= '<div>Wind-Direction</div><div>'+j["Wind-Direction"].replace("VRB","variable")+'';
+    } else {
+      metar+= '<div>Wind-Direction</div><div>'+j["Wind-Direction"]*1+'&deg;';
+    }
     if (j["Wind-Variable-Dir"][0] !== undefined) {
       metar += ' ( ' + j["Wind-Variable-Dir"][0] + '&deg; - ';
       metar += j["Wind-Variable-Dir"][1] + '&deg; )';
@@ -47,7 +50,7 @@ fetch('https://avwx.rest/api/metar/edds')
     if (j.Visibility*1 >= 9999 ) {
         metar+= '<div>Visibility</div><div>>= 10 km</div>';
     } else {
-      metar+= '<div>Visibility</div><div>'+j.Visibility+'</div>';
+      metar+= '<div>Visibility</div><div>'+j.Visibility+' m</div>';
     }
     metar+= '<div>Clouds:</div><div>';
     Object.keys(j["Cloud-List"]).forEach(function(k){
@@ -79,6 +82,7 @@ fetch('https://avwx.rest/api/metar/edds')
       });
       metar += '<br/>';
     });
+    if (j["Cloud-List"].length === 0 && j["Raw-Report"].indexOf("CAVOK") > -1) metar += "CAVOK: Ceiling And Visibility OK"
     metar+= '</div>';
     if (j.Remarks !== 'NOSIG' ) {
       metar+= '<div>Remarks</div><div>'+j.Remarks+'</div>';
