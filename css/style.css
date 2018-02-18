@@ -50,7 +50,7 @@ navigation {
   display: none; }
 
 body:after {
-  background: url(../images/bg-vfr-chart.png);
+  background: url(../images/bg-vfr-chart.jpg) no-repeat center center fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -58,8 +58,8 @@ body:after {
   content: "";
   position: fixed;
   z-index: -1;
-  opacity: 0.1;
-  background-repeat: repeat; }
+  background-repeat: repeat;
+  background-size: cover; }
 
 .page {
   background: rgba(255, 255, 255, 0.8);
@@ -101,6 +101,11 @@ a[href] {
 a[href]:after {
   font-family: "FontAwesome";
   content: " 🔗"; }
+
+.rawdata {
+  font-size: small;
+  margin: 1em 0em 1em 0em;
+  font-family: monospace; }
 
 figure {
   display: inline-block; }
@@ -168,6 +173,14 @@ a[href$=".pdf"]:after {
 
   .page {
     column-count: 2; } }
+.icon {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor; }
+
 @media screen and (max-width: 1000px) {
   navigation {
     display: flex;
